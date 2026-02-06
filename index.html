@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoxRoyal | Premium Online Voting System</title>
+    <meta name="description" content="Secure, transparent, and elegant online voting platform for modern governance.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav>
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+            <div class="logo">VoxRoyal</div>
+            <div class="nav-links">
+                <button class="btn btn-gold" id="loginBtn">Login</button>
+            </div>
+        </div>
+    </nav>
+
+    <main id="app">
+        <!-- Landing Section -->
+        <section id="view-landing" class="view active">
+            <div class="container">
+                <div class="hero-content" style="text-align: center; max-width: 800px; margin: 0 auto;">
+                    <h1 style="font-size: 4rem; margin-bottom: 1.5rem;">The Future of Democracy is Here.</h1>
+                    <p style="font-size: 1.25rem; color: var(--text-muted); margin-bottom: 2.5rem;">
+                        Experience a new standard in electoral integrity. VoxRoyal provides a secure, encrypted, and
+                        visually stunning platform for your most important decisions.
+                    </p>
+                    <div class="hero-actions" style="display: flex; gap: 1rem; justify-content: center;">
+                        <button class="btn btn-primary btn-lg" onclick="App.showAuth('register')">Get Started</button>
+                        <button class="btn glass" id="learnMore">How it Works</button>
+                    </div>
+                </div>
+
+                <div class="features"
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 5rem;">
+                    <div class="glass" style="padding: 2rem;">
+                        <h3 style="margin-bottom: 1rem;">Unmatched Security</h3>
+                        <p style="color: var(--text-muted);">End-to-end encryption ensures that every vote remains
+                            private and tamper-proof.</p>
+                    </div>
+                    <div class="glass" style="padding: 2rem;">
+                        <h3 style="margin-bottom: 1rem;">Real-time Results</h3>
+                        <p style="color: var(--text-muted);">Watch as democracy unfolds with our dynamic result
+                            visualization engine.</p>
+                    </div>
+                    <div class="glass" style="padding: 2rem;">
+                        <h3 style="margin-bottom: 1rem;">Elegant Simplicity</h3>
+                        <p style="color: var(--text-muted);">A premium interface designed to make voting accessible and
+                            enjoyable for everyone.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard Section -->
+        <section id="view-dashboard" class="view hidden">
+            <div class="container">
+                <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem;">
+                    <div>
+                        <h2 style="font-size: 2.5rem;">Active Elections</h2>
+                        <p style="color: var(--text-muted);">Select an ongoing election to cast your secure vote.</p>
+                    </div>
+                    <div id="userProfile" class="glass"
+                        style="padding: 0.5rem 1rem; border-radius: 30px; display: flex; align-items: center; gap: 0.8rem;">
+                        <div style="width: 32px; height: 32px; background: var(--secondary); border-radius: 50%;"></div>
+                        <span id="userNameDisplay" style="font-weight: 600;">Voter #7421</span>
+                    </div>
+                </div>
+                <div id="electionList" class="dashboard-grid">
+                    <!-- Elections injected via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Voting Interface Section -->
+        <section id="view-voting" class="view hidden">
+            <div class="container voting-container">
+                <button class="btn" onclick="App.navigate('view-dashboard')" style="margin-bottom: 2rem;">← Back to
+                    Dashboard</button>
+                <div id="activeElectionDetails" class="glass" style="padding: 3rem; text-align: center;">
+                    <h2 id="votingTitle" style="font-size: 2.5rem; margin-bottom: 3rem;">Cast Your Vote</h2>
+                    <div id="candidatesList" style="text-align: left; max-width: 500px; margin: 0 auto 3rem auto;">
+                        <!-- Candidates injected via JS -->
+                    </div>
+                    <button class="btn btn-gold btn-lg" style="width: 100%; max-width: 500px;"
+                        id="submitVoteBtn">Confirm Secure Vote</button>
+                </div>
+            </div>
+        </section>
+        <!-- Results Page Section -->
+        <section id="view-results" class="view hidden">
+            <div class="container" style="max-width: 900px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem;">
+                    <h2 style="font-size: 2.5rem;">Live Election Results</h2>
+                    <button class="btn btn-primary" onclick="App.navigate('view-dashboard')">Return to
+                        Dashboard</button>
+                </div>
+                <div id="resultsContent" class="glass" style="padding: 3rem;">
+                    <!-- Results injected via JS -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="modal-overlay">
+        <div class="modal-content glass">
+            <h2 id="modalTitle" style="margin-bottom: 2rem; text-align: center;">Join VoxRoyal</h2>
+            <form id="authForm" onsubmit="event.preventDefault(); App.handleAuth()">
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" class="form-input" placeholder="e.g. citizen@gov.org" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="form-input" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn btn-gold" style="width: 100%; margin-top: 1rem;">Continue</button>
+                <p style="text-align: center; margin-top: 1.5rem; font-size: 0.9rem; color: var(--text-muted);">
+                    By continuing, you agree to our <a href="#" style="color: var(--secondary);">Terms of Service</a>.
+                </p>
+            </form>
+            <button class="btn" onclick="App.closeAuth()"
+                style="position: absolute; top: 1rem; right: 1rem; padding: 0.5rem;">✕</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
